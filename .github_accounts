@@ -1,0 +1,3 @@
+# Format: account=username,email
+personal=abc,abc@gmail.com
+work=def-ghi,def.ghi@org.com

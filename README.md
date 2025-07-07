@@ -1,97 +1,79 @@
-# 🔁 GitHub Account Switcher (Multi-Account Git Tool)
+# 🔁 GitHub Account Switcher
 
-Switch between multiple GitHub accounts (e.g. personal & work) **seamlessly** on a single machine.  
-No more manual credential juggling, GUI popups, or authentication failures.
-
----
+Easily switch between multiple GitHub accounts (like personal and work) from the command line — without GUI prompts or credential headaches.
 
 ## ✨ Features
 
-- 🔄 One command to switch between GitHub accounts
-- ✅ Stores tokens securely (without exposing them to Git prompts)
-- 👥 Supports **multiple accounts** (like `personal`, `work`, or client-specific)
-- 🛑 Disables annoying `git-askpass` popups and GUI prompts
-- ✅ Works with any Git repo on your machine using HTTPS
-
----
+- One command to switch accounts
+- Stores tokens securely
+- Disables GUI prompts (`askpass`)
+- Uses HTTPS (no SSH keys needed)
+- Works with private and public repos
 
 ## 🚀 How It Works
 
-This script sets Git config and stores a personal access token (PAT) for the selected account in your `~/.git-credentials` file in a way Git understands.
-
----
+This tool:
+- Sets the global Git username and email
+- Stores a personal access token (PAT) securely in `~/.git-credentials`
+- Uses external config files to manage multiple accounts
+- Prevents Git from triggering GUI prompts (askpass)
 
 ## 🛠️ Setup Instructions
 
-### 1. 📄 Create Personal Access Tokens (PATs)
+### 1. Create GitHub Personal Access Tokens
 
-For each GitHub account you want to use:
+- Visit: [https://github.com/settings/tokens](https://github.com/settings/tokens)
+- Click "Generate new token (classic)"
+- Select scopes like:
+  - `repo`
+  - `read:org`
+  - `workflow`
+- Copy and save the token
 
-- Go to [https://github.com/settings/tokens](https://github.com/settings/tokens)
-- Click **"Generate new token (classic)"**
-- Recommended scopes:
-  - ✅ `repo`
-  - ✅ `read:org`
-  - ✅ `workflow`
-- Copy the generated token immediately — it’s shown only once.
+### 2. Create Token File
 
----
+Create a file at:
 
-### 2. 📁 Create the token file
-
-Save your tokens in a file at:
-
-```
+```bash
 ~/.github_tokens
 ```
 
-Format:
+Example content:
 
 ```ini
-personal=ghp_yourTokenForPersonalAccountHere
-work=ghp_yourTokenForWorkAccountHere
+personal=ghp_exampleTokenForPersonal
+work=ghp_exampleTokenForWork
 ```
 
-✅ You can add more accounts later using the same format.
+### 3. Create Account Config File
 
----
-
-### 3. 🧠 Know your account names and emails
-
-These are hardcoded in the script for now. Make sure the following match your accounts:
+Create a file at:
 
 ```bash
-personal → jivansupe → jivansupe@gmail.com  
-work     → jivan-supe → jivan.supe@indexnine.com
+~/.github_accounts
 ```
 
-You can edit these in the `change.sh` script inside the `GITHUB_ACCOUNTS` and `GITHUB_EMAILS` maps.
+Example content:
 
----
+```ini
+# Format: account=username,email
+personal=your-username,your-email@example.com
+work=your-work-username,your-work-email@example.com
+```
 
-### 4. 💡 Optional: Make the script executable
+### 4. Make the Script Executable
 
 ```bash
 chmod +x change.sh
 ```
 
-Then you can run it as:
+Run it with:
 
 ```bash
 ./change.sh
 ```
 
----
-
-## 🔧 How to Use
-
-Any time you want to switch accounts:
-
-```bash
-./change.sh
-```
-
-You’ll be prompted like:
+You’ll see:
 
 ```
 Select a GitHub account:
@@ -100,40 +82,31 @@ Select a GitHub account:
 #?
 ```
 
-Pick your account. The script:
+## 🔒 Security Note
 
-- Sets global Git username/email
-- Stores token in `~/.git-credentials` scoped to `github.com`
-- Cleans up old credential helpers
-- Prevents `git-askpass` and GUI prompts
-- Verifies token is correct via GitHub API
+These files contain secrets:
 
-After switching, you can push/pull to any repo that account has access to.
+- `~/.github_tokens`
+- `~/.github_accounts`
+- `~/.git-credentials`
 
----
+Make sure they're protected:
 
-## 🔐 Security Notes
+```bash
+chmod 600 ~/.github_tokens ~/.github_accounts ~/.git-credentials
+```
 
-- Your token is stored in plain text in `~/.github_tokens` and `~/.git-credentials`
-- Make sure those files have `600` permissions:
-  ```bash
-  chmod 600 ~/.github_tokens ~/.git-credentials
-  ```
-- Don’t commit or share these files!
-
----
+Never commit them to any repository.
 
 ## 🧼 Troubleshooting
 
-**Problem** | **Solution**
---|--
-🔁 Still being asked for username/password | Ensure token is stored at `https://github.com` level, not at repo/org level. Script handles this now.
-🔒 Permission denied (403) | Token doesn’t have access to that repo — verify scopes or switch to correct account.
-🧠 Still getting GUI login | Git Credential Manager or `git-askpass` not properly disabled — script now clears them.
+| Issue                         | Solution                                                                 |
+|------------------------------|--------------------------------------------------------------------------|
+| Still asked for credentials  | Ensure credentials are for `https://github.com`, and `askpass` is disabled |
+| 403 error                    | Token might not have repo access, or wrong account selected               |
+| GUI prompt shows up          | Run the script again to re-apply Git config                               |
 
----
-
-## 💬 Example
+## ✅ Example Usage
 
 ```bash
 $ ./change.sh
@@ -142,16 +115,18 @@ Select a GitHub account:
 2) work
 #? 2
 
-🔄 Updating stored GitHub credentials...
 ✅ Switched to 'work' account globally!
-✅ Authentication successful for 'jivan-supe'!
+✅ Authentication successful!
 ```
+
+## 🔗 Works With
+
+- ✅ Any GitHub repo using HTTPS
+- ✅ Personal or organization-owned repos
+- ✅ Multiple GitHub accounts
+
+❌ SSH remote URLs are not supported in this script.
 
 ---
 
-## 📦 Git Repo Compatibility
-
-- ✅ Works with **any Git repo using HTTPS**
-- ✅ Private or public repos
-- ✅ Org-level or personal accounts
-- ❌ SSH remote URLs are not supported in this tool (yet)
+Happy switching! 🔁
