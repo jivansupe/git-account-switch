@@ -1,0 +1,28 @@
+{
+  "name": "easy-git-account-switch",
+  "version": "1.0.1",
+  "description": "Easily switch between multiple GitHub accounts from the command line.",
+  "bin": {
+    "git-account-switch": "./change.sh"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jivansupe/git-account-switch.git"
+  },
+  "author": "Jivan Supe",
+  "license": "MIT",
+  "keywords": ["github", "accounts", "cli", "git", "switch"],
+  "bugs": {
+    "url": "https://github.com/jivansupe/git-account-switch/issues"
+  },
+  "homepage": "https://github.com/jivansupe/git-account-switch#readme",
+  "engines": {
+    "node": ">=10"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  }
+}
