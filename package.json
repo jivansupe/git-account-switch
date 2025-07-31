@@ -1,6 +1,6 @@
 {
   "name": "@jivansupe/easy-git-account-switch",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Easily switch between multiple GitHub accounts from the command line.",
   "bin": {
     "git-account-switch": "./change.sh"
@@ -14,7 +14,13 @@
   },
   "author": "Jivan Supe",
   "license": "MIT",
-  "keywords": ["github", "accounts", "cli", "git", "switch"],
+  "keywords": [
+    "github",
+    "accounts",
+    "cli",
+    "git",
+    "switch"
+  ],
   "bugs": {
     "url": "https://github.com/jivansupe/git-account-switch/issues"
   },
