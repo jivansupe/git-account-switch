@@ -1,6 +1,6 @@
 {
   "name": "@jivansupe/easy-git-account-switch",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Easily switch between multiple GitHub accounts from the command line.",
   "bin": {
     "git-account-switch": "./change.sh"
