@@ -1,6 +1,27 @@
+
 # 🔁 GitHub Account Switcher
 
 Easily switch between multiple GitHub accounts (like personal and work) from the command line — without GUI prompts or credential headaches.
+
+---
+
+## 📦 Installation via NPM (Globally)
+
+Install the CLI tool globally via npm:
+
+```bash
+npm install -g easy-git-account-switch
+```
+
+Once installed, use it anywhere via:
+
+```bash
+easy-git-account-switch
+```
+
+> This runs the same logic as `change.sh` but accessible system-wide as a command-line tool.
+
+---
 
 ## ✨ Features
 
@@ -9,6 +30,9 @@ Easily switch between multiple GitHub accounts (like personal and work) from the
 - Disables GUI prompts (`askpass`)
 - Uses HTTPS (no SSH keys needed)
 - Works with private and public repos
+- Now available as a global CLI via npm
+
+---
 
 ## 🚀 How It Works
 
@@ -17,6 +41,10 @@ This tool:
 - Stores a personal access token (PAT) securely in `~/.git-credentials`
 - Uses external config files to manage multiple accounts
 - Prevents Git from triggering GUI prompts (askpass)
+- Authenticates via GitHub API to verify your token
+- Lists local Git repos and shows remotes
+
+---
 
 ## 🛠️ Setup Instructions
 
@@ -29,6 +57,8 @@ This tool:
   - `read:org`
   - `workflow`
 - Copy and save the token
+
+---
 
 ### 2. Create Token File
 
@@ -44,6 +74,8 @@ Example content:
 personal=ghp_exampleTokenForPersonal
 work=ghp_exampleTokenForWork
 ```
+
+---
 
 ### 3. Create Account Config File
 
@@ -61,7 +93,9 @@ personal=your-username,your-email@example.com
 work=your-work-username,your-work-email@example.com
 ```
 
-### 4. Make the Script Executable
+---
+
+### 4. Make the Script Executable (If Using Locally)
 
 ```bash
 chmod +x change.sh
@@ -73,6 +107,12 @@ Run it with:
 ./change.sh
 ```
 
+Or globally, just use:
+
+```bash
+easy-git-account-switch
+```
+
 You’ll see:
 
 ```
@@ -81,6 +121,8 @@ Select a GitHub account:
 2) work
 #?
 ```
+
+---
 
 ## 🔒 Security Note
 
@@ -98,18 +140,22 @@ chmod 600 ~/.github_tokens ~/.github_accounts ~/.git-credentials
 
 Never commit them to any repository.
 
+---
+
 ## 🧼 Troubleshooting
 
-| Issue                         | Solution                                                                 |
-|------------------------------|--------------------------------------------------------------------------|
+| Issue                         | Solution                                                                  |
+|------------------------------|---------------------------------------------------------------------------|
 | Still asked for credentials  | Ensure credentials are for `https://github.com`, and `askpass` is disabled |
-| 403 error                    | Token might not have repo access, or wrong account selected               |
-| GUI prompt shows up          | Run the script again to re-apply Git config                               |
+| 403 error                    | Token might not have repo access, or wrong account selected                |
+| GUI prompt shows up          | Run the script again to re-apply Git config                                |
+
+---
 
 ## ✅ Example Usage
 
 ```bash
-$ ./change.sh
+$ easy-git-account-switch
 Select a GitHub account:
 1) personal
 2) work
@@ -118,6 +164,8 @@ Select a GitHub account:
 ✅ Switched to 'work' account globally!
 ✅ Authentication successful!
 ```
+
+---
 
 ## 🔗 Works With
 
