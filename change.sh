@@ -66,8 +66,9 @@ echo "✅ Switched to '$ACCOUNT' account globally!"
 git config --global --list | grep -E 'user.name|user.email|credential.helper'
 
 # Optional repo awareness
-echo "ℹ️ Skipping remote URL rewriting — assumed correct per repo."
-find . -type d -name ".git" | while read git_dir; do
+ecfind "$HOME" -type d -name ".git" \
+  -not -path "*/AppData/*" \
+  2>/dev/null | while read git_dir; do
   repo_root=$(dirname "$git_dir")
   (
     cd "$repo_root" || exit

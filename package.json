@@ -1,10 +1,13 @@
 {
-  "name": "@jivansupe/easy-git-account-switch",
-  "version": "1.0.6",
+  "name": "easy-git-account-switch",
+  "version": "1.0.8",
   "description": "Easily switch between multiple GitHub accounts from the command line.",
   "bin": {
-    "git-account-switch": "./change.sh"
+    "easy-git-account-switch": "./change.sh"
   },
+  "files": [
+    "change.sh"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -27,8 +30,5 @@
   "homepage": "https://github.com/jivansupe/git-account-switch#readme",
   "engines": {
     "node": ">=10"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
   }
 }
