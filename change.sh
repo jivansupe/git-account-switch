@@ -49,6 +49,8 @@ echo "🔄 Updating stored GitHub credentials..."
 # Set Git config
 git config --system --unset credential.helper 2>/dev/null
 git config --global --unset-all credential.helper
+git config --global --unset credential.helper manager 2>/dev/null
+git config --global --unset credential.helper manager-core 2>/dev/null
 git config --global credential.helper "store"
 git config --global user.name "$GITHUB_USER"
 git config --global user.email "$GITHUB_EMAIL"
@@ -66,9 +68,8 @@ echo "✅ Switched to '$ACCOUNT' account globally!"
 git config --global --list | grep -E 'user.name|user.email|credential.helper'
 
 # Optional repo awareness
-ecfind "$HOME" -type d -name ".git" \
-  -not -path "*/AppData/*" \
-  2>/dev/null | while read git_dir; do
+echo "ℹ️ Skipping remote URL rewriting — assumed correct per repo."
+find . -type d -name ".git" | while read git_dir; do
   repo_root=$(dirname "$git_dir")
   (
     cd "$repo_root" || exit
