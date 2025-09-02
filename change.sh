@@ -49,6 +49,8 @@ echo "🔄 Updating stored GitHub credentials..."
 # Set Git config
 git config --system --unset credential.helper 2>/dev/null
 git config --global --unset-all credential.helper
+git config --global --unset credential.helper manager 2>/dev/null
+git config --global --unset credential.helper manager-core 2>/dev/null
 git config --global credential.helper "store"
 git config --global user.name "$GITHUB_USER"
 git config --global user.email "$GITHUB_EMAIL"
